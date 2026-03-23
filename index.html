@@ -50,6 +50,41 @@
 </div>
     </section>
 
+    <section>
+        <div class="mp3-player">
+  <!-- Track Info -->
+  <div class="details">
+    <div class="track-art"></div>
+    <div class="track-name">Track Title</div>
+    <div class="track-artist">Artist Name</div>
+  </div>
+
+  <!-- Progress Bar & Time -->
+  <div class="slider-container">
+    <span id="current-time">00:00</span>
+    <input type="range" id="seek-slider" min="0" max="100" value="0">
+    <span id="duration-time">00:00</span>
+  </div>
+
+  <!-- Controls -->
+  <div class="buttons">
+    <button id="prev-btn">⏮</button>
+    <button id="playpause-btn">▶</button>
+    <button id="next-btn">⏭</button>
+  </div>
+
+  <!-- Volume -->
+  <div class="volume-container">
+    <span>🔈</span>
+    <input type="range" id="volume-slider" min="0" max="100" value="100">
+    <span>🔊</span>
+  </div>
+
+  <audio id="main-audio" src="your-song.mp3"></audio>
+</div>
+
+    </section>
+
     <section id="next" class="bg-sky">
         <div class="floating-box">
             <h2>Email me</h2>
@@ -106,6 +141,53 @@ document.querySelectorAll('.polaroid').forEach(item => {
     item.addEventListener('mouseenter', () => heart.style.fontSize = "40px");
     item.addEventListener('mouseleave', () => heart.style.fontSize = "24px");
 });
+    const audio = document.getElementById('main-audio');
+const playBtn = document.getElementById('playpause-btn');
+const seekSlider = document.getElementById('seek-slider');
+const volumeSlider = document.getElementById('volume-slider');
+const currentTimeDisplay = document.getElementById('current-time');
+const durationDisplay = document.getElementById('duration-time');
+
+// Play/Pause toggle
+playBtn.addEventListener('click', () => {
+    if (audio.paused) {
+        audio.play();
+        playBtn.textContent = '⏸';
+    } else {
+        audio.pause();
+        playBtn.textContent = '▶';
+    }
+});
+
+// Update seek slider and time as song plays
+audio.addEventListener('timeupdate', () => {
+    const position = audio.currentTime / audio.duration;
+    seekSlider.value = position * 100;
+    
+    // Format time (MM:SS)
+    let curMins = Math.floor(audio.currentTime / 60);
+    let curSecs = Math.floor(audio.currentTime - curMins * 60);
+    currentTimeDisplay.textContent = `${curMins}:${curSecs < 10 ? '0' + curSecs : curSecs}`;
+});
+
+// Seek when user drags slider
+seekSlider.addEventListener('input', () => {
+    const seekTo = audio.duration * (seekSlider.value / 100);
+    audio.currentTime = seekTo;
+});
+
+// Volume control
+volumeSlider.addEventListener('input', () => {
+    audio.volume = volumeSlider.value / 100;
+});
+
+// Load duration once metadata is ready
+audio.addEventListener('loadedmetadata', () => {
+    let durMins = Math.floor(audio.duration / 60);
+    let durSecs = Math.floor(audio.duration - durMins * 60);
+    durationDisplay.textContent = `${durMins}:${durSecs < 10 ? '0' + durSecs : durSecs}`;
+});
+
     </script>
 </body>
 </html>
