@@ -50,41 +50,6 @@
 </div>
     </section>
 
-    <section>
-        <div class="mp3-player">
-  <!-- Track Info -->
-  <div class="details">
-    <div class="track-art"></div>
-    <div class="track-name">Fame Is A Gun</div>
-    <div class="track-artist">Addison Rae</div>
-  </div>
-
-  <!-- Progress Bar & Time -->
-  <div class="slider-container">
-    <span id="current-time">00:00</span>
-    <input type="range" id="seek-slider" min="0" max="100" value="0">
-    <span id="duration-time">00:00</span>
-  </div>
-
-  <!-- Controls -->
-  <div class="buttons">
-    <button id="prev-btn">⏮</button>
-    <button id="playpause-btn">▶</button>
-    <button id="next-btn">⏭</button>
-  </div>
-
-  <!-- Volume -->
-  <div class="volume-container">
-    <span>🔈</span>
-    <input type="range" id="volume-slider" min="0" max="100" value="100">
-    <span>🔊</span>
-  </div>
-
-  <audio id="main-audio" src="your-song.mp3"></audio>
-</div>
-
-    </section>
-
     <section id="next" class="bg-sky">
         <div class="floating-box">
             <h2>Email me</h2>
@@ -141,65 +106,6 @@ document.querySelectorAll('.polaroid').forEach(item => {
     item.addEventListener('mouseenter', () => heart.style.fontSize = "40px");
     item.addEventListener('mouseleave', () => heart.style.fontSize = "24px");
 });
-   const audio = document.getElementById('main-audio');
-const playBtn = document.getElementById('playpause-btn');
-const nextBtn = document.getElementById('next-btn');
-const prevBtn = document.getElementById('prev-btn');
-const trackName = document.querySelector('.track-name');
-const trackArtist = document.querySelector('.track-artist');
-
-// 1. Your list of songs
-const songs = [
-  { name: "Song One", artist: "Artist A", src: "Addison Rae Fame is a Gun (1).mp3" },
-  { name: "Song Two", artist: "Artist B", src: "Beyonce - Diva.mp3" },
-  { name: "Song Three", artist: "Artist C", src: "Breakin Dishes - Rihanna.mp3" }
-];
-
-let songIndex = 0; // Current song tracking
-
-// 2. Function to update the player info
-function loadSong(song) {
-  trackName.innerText = song.name;
-  trackArtist.innerText = song.artist;
-  audio.src = song.src;
-}
-
-// Initialize first song
-loadSong(songs[songIndex]);
-
-// 3. Play/Pause Logic
-playBtn.addEventListener('click', () => {
-  if (audio.paused) {
-    audio.play();
-    playBtn.textContent = '⏸';
-  } else {
-    audio.pause();
-    playBtn.textContent = '▶';
-  }
-});
-
-// 4. Next Song Logic
-nextBtn.addEventListener('click', () => {
-  songIndex++;
-  if (songIndex > songs.length - 1) songIndex = 0; // Loop to start
-  loadSong(songs[songIndex]);
-  audio.play();
-  playBtn.textContent = '⏸';
-});
-
-// 5. Previous Song Logic
-prevBtn.addEventListener('click', () => {
-  songIndex--;
-  if (songIndex < 0) songIndex = songs.length - 1; // Loop to end
-  loadSong(songs[songIndex]);
-  audio.play();
-  playBtn.textContent = '⏸';
-});
-
-// 6. AUTO-PLAY NEXT (Optional but recommended)
-audio.onended = () => {
-  nextBtn.click(); // Just simulates a click on the "next" button
-};
 
     </script>
 </body>
