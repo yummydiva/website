@@ -277,3 +277,44 @@ body.dark-mode .parallax > use:nth-child(3) {
     object-fit: cover; /* Keeps images from looking squished */
     border: 2px solid var(--dark); 
 }
+.mp3-player {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 30px;
+  width: 320px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.track-art {
+  width: 150px;
+  height: 150px;
+  background-image: url('cover.jpg');
+  background-size: cover;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+input[type="range"] {
+  width: 100%;
+  cursor: pointer;
+  accent-color: #1db954; /* Branding color */
+}
+
+.buttons button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  margin: 0 15px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.buttons button:hover {
+  transform: scale(1.2);
+}
